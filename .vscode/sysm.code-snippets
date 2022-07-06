@@ -1,0 +1,16 @@
+{
+	"Import cdks": {
+		"scope": "typescript",
+		"prefix": "import_cdks",
+		"body": [
+			"import * as $1 from 'aws-cdk-lib/aws-$1'"
+		]
+	},
+	"Import cdks default": {
+		"scope": "typescript",
+		"prefix": "import_cdks_default",
+		"body": [
+			"import * as cdk from 'aws-cdk-lib'"
+		]
+	}
+}

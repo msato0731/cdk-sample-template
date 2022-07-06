@@ -1,0 +1,31 @@
+name: deploy-production
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+    env: 
+      CDK_DIR: "."
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          role-to-assume: ${{ secrets.PRD_AWS_IAM_ROLE_ARN }}
+          aws-region: ap-northeast-1
+
+      - name: CDK Deploy
+        uses: aws-actions/aws-codebuild-run-build@v1
+        with:
+          project-name: cdk-deploy-prd-v2
+          env-vars-for-codebuild: |
+            CDK_DIR,
+        env:
+          CDK_DIR: ${{ env.CDK_DIR }}

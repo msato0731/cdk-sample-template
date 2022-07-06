@@ -1,0 +1,35 @@
+name: diff-production
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:  
+
+jobs:
+  diff-production:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+    env: 
+      CDK_DIR: "."
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          role-to-assume: ${{ secrets.PRD_AWS_IAM_ROLE_ARN }}
+          aws-region: ap-northeast-1
+
+      - name: CDK Diff
+        uses: aws-actions/aws-codebuild-run-build@v1
+        with:
+          project-name: cdk-diff-prd-v2
+          env-vars-for-codebuild: |
+            CDK_DIR,
+            NODE_AUTH_TOKEN
+        env:
+          CDK_DIR: ${{ env.CDK_DIR }}
+          NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}

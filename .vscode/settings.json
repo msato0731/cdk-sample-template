@@ -1,0 +1,19 @@
+{
+  "editor.tabSize": 2,
+  "eslint.enable": true,
+  "eslint.nodePath": "./node_modules/eslint/bin/eslint.js",
+  "eslint.workingDirectories": [
+    "./lib",
+    "./construct",
+    "./env",
+    "./core",
+    "./bin",
+    "./test",
+    "./cdk-nag"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "liveServer.settings.port": 5501
+}

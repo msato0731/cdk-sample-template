@@ -1,0 +1,21 @@
+# Local state files & OS specifics
+.DS_Store
+.idea
+
+# Dependency directories
+node_modules
+
+# TS build / generate output
+dist
+
+# CDK Context & Staging files
+cdk.context.json
+.cdk.staging/
+cdk.out/
+
+# Yarn error log
+yarn-error.log
+
+# Cloud9
+.c9
+.nzm-*
